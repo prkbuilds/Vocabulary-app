@@ -1,0 +1,25 @@
+.nav {
+    height: 8vh;
+}
+
+.main {
+    border-radius: 1em 1em 0 0;
+    background-color: #fff;
+    color: #000;
+    height: 92vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.main::-webkit-scrollbar {
+    display: none;
+}
+
+.main .main-heading-wrapper {
+    position: sticky;
+    padding-top: 0.5em;
+    top: 0;
+    background-color: #fff;
+}

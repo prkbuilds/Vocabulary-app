@@ -1,24 +1,16 @@
-export default function wordList() {
+import { Container, Divider } from '@mui/material'
+import Word from './Word'
+
+export default function WordList() {
   return(
-    <div>
-      <div>
-        <h1>Vocabulary App</h1>
-        <input type="text" />
-      </div>
-      <div>
-        <h2>piecemeal</h2>
-        <p>(adjective) characterized by unsystematic partial measures taken over a period of time.</p>
-        <p>(adverb) in an unsystematic way, through partial measures taken over a period of time.</p>
-      </div>
-      <div>
-        <h2>melodrama</h2>
-        <p>(noun) a sensational dramatic piece with exaggerated characters and exciting events intended 
-to appeal to the emotions.</p>
-      </div>
-      <div>
-        <h2>thorough</h2>
-        <p>(adjective) complete with regard to every detail; not superficial or partial.</p>
-      </div>
-    </div>
+    <Container className="main">
+      <Container className="main-heading-wrapper">
+        <h4 className="main-heading">Word List</h4>
+        <Divider textAlign="center" />
+      </Container>
+      <Container className="word-list">
+        <Word />
+      </Container>
+    </Container>
   )
 }
