@@ -15,6 +15,7 @@ const axios = require('axios')
 router.post('/', async (req, res) => {
     try {
         const wordId = req.body.word
+        if(wordId === undefined || wordId === null || wordId == "") throw new Error("ERROR : Invalid Word")
         const flag = await Word.find({ "word": wordId })
         if(flag.length > 0) throw new Error("ERROR : Word already exists")
         const response = await axios({

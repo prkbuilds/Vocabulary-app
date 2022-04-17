@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import axios from 'axios'
 import { Box, Button, Fab, Input, Modal, Toolbar, Typography } from '@mui/material'
 import { Add } from '@mui/icons-material'
+
+const port = process.env.REACT_APP_SERVER_PORT || 5000;
 
 const buttonStyle = {
   position: 'fixed', 
@@ -25,8 +28,21 @@ const modalStyle = {
 
 export default function AddWords() {
   const [open, setOpen] = useState(false)
+  const [word, setWord] = useState("")
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    axios.post(`http://localhost:${port}/`,{
+        word: word
+    })
+      .then((response) => {
+        console.log(response.data)
+        handleClose()
+      })
+      .catch((error) => console.error(error))
+  }
 
   return (
     <>
@@ -44,10 +60,10 @@ export default function AddWords() {
             Add to Dictionary
           </Typography>
           <p>New Word</p>
-          <Input type="text" />
+          <Input type="text" value={word} onChange={e => setWord(e.target.value)} />
           <Toolbar disableGutters sx={{ textAlign: 'right' }}>
             <Button onClick={handleClose} sx={{ color: '#5D1049', ml: 'auto', mr: 0 }}>Cancel</Button>
-            <Button sx={{ color: '#5D1049' }}>Add</Button>
+            <Button onClick={onSubmit} sx={{ color: '#5D1049' }}>Add</Button>
           </Toolbar>
         </Box>
       </Modal>

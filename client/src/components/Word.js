@@ -15,9 +15,10 @@ const modalStyle = {
   color: 'black',
   boxShadow: 24,
   p: 4,
+  overflow: 'scroll'
 }
 
-export default function Words() {
+export default function Words(props) {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -25,9 +26,13 @@ export default function Words() {
   return (
     <>
       <div onClick={handleOpen}>
-        <h3>piecemeal</h3>
-        <p>(adjective) characterized by unsystematic partial measures taken over a period of time.</p>
-        <p>(adverb) in an unsystematic way, through partial measures taken over a period of time.</p>
+        <h3>{props.word.word}</h3>
+        {
+          props.word.lexicalEntries.map(lexicalEntry => (
+            <p key={lexicalEntry.lexicalCategory}>({lexicalEntry.lexicalCategory})&nbsp;
+              {lexicalEntry.entry.senses[0][0].definitions}</p>
+          ))
+        }
       </div>
       <Modal
         open={open}
@@ -38,28 +43,37 @@ export default function Words() {
         <Box sx={modalStyle}>
           <Container>
             <Toolbar disableGutters sx={{ textAlign: 'right', my: 5 }}>
-              <Typography variant="h2" sx={{ mr: 'auto', fontFamily: 'Kumbh-Sans' }}>rhetorical</Typography>
+              <Typography variant="h2" sx={{ mr: 'auto', fontFamily: 'Kumbh-Sans' }}>{props.word.word}</Typography>
               <IconButton onClick={handleClose} >
                   <Close />
               </IconButton>
             </Toolbar>
-            <p>
-              <i>adjective</i>
-              <br />
-              Orgin: late Middle English (first used in the sense ‘eloquently expressed’): via Latin from Greek 
-  rhētorikos (from rhētor ‘rhetor’) + -al
-            </p>
-            <p>relating to or concerned with the art of rhetoric</p>
-            <ul>
-              <li>repetition is a common rhetorical device</li>
-            </ul>
-            <p>relating to or concerned with the art of rhetoric</p>
-            <ul>
-              <li>repetition is a common rhetorical device</li>
-            </ul><p>relating to or concerned with the art of rhetoric</p>
-            <ul>
-              <li>repetition is a common rhetorical device</li>
-            </ul>
+            {
+              props.word.lexicalEntries.map(lexicalEntry => (
+                <>
+                  <Typography variant="p" sx={{ color: 'gray' }}>
+                    <i>{lexicalEntry.lexicalCategory ? `${lexicalEntry.lexicalCategory}` : ''}</i>
+                    <br />
+                    {lexicalEntry.entry.etymologies ? `Orgin: ${lexicalEntry.entry.etymologies}` : ''}
+                  </Typography>
+                  {
+                    lexicalEntry.entry.senses.map(sense => (
+                      sense.map(s => (
+                        <>
+                          <p>{s.definitions}</p>
+                          <ul>
+                            {
+                              (s.examples) ? s.examples.map(example => (<li>{example}</li>)) : ""
+                            }
+                          </ul>
+                        </>
+                      ))
+                    ))
+                  }
+                </>
+              )
+            )
+          }
           </Container>
         </Box>
       </Modal>
