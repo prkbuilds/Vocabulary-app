@@ -4,6 +4,8 @@
     <img src="https://raw.githubusercontent.com/PratikFandade/vocabulary-app/main/example.jpg"/>
 </p>
 
+The 🕸️Web-App is deployed on 🌟[Heroku](https://vocabulary-app-01.herokuapp.com)
+
 ## 📚 About
 Vocabulary app for storing selective words in Dictionary & searching them according to need.
 
