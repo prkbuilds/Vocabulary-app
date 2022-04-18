@@ -17,7 +17,7 @@ export default function App() {
   // Fetching Data from API
   const fetchData = async () => {
     const port = process.env.PORT;
-    const wordlist = await axios.get(`https://vocabulary-app-01.herokuapp.com/`)
+    const wordlist = await axios.get(`https://vocabulary-app-01.herokuapp.com/words/`)
     setWordList(wordlist.data)
   }
   
@@ -25,7 +25,7 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       const port = process.env.PORT;
-      const wordlist = await axios.get(`https://vocabulary-app-01.herokuapp.com/`)
+      const wordlist = await axios.get(`https://vocabulary-app-01.herokuapp.com/words/`)
       setWordList(wordlist.data)
     }
     fetchData()
