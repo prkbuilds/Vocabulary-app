@@ -1,3 +1,5 @@
+/* Word Model for storing in words collection */
+
 const mongoose = require('mongoose')
 
 const wordSchema = new mongoose.Schema({

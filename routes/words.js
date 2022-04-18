@@ -1,23 +1,24 @@
-// Importing Word Model
+/* Main words Router */
 const Word = require('../models/word_model')
 
-// Importing Express Modules
 const express = require('express')
 const router = express.Router()
 
-// Importing Connection details
 require('dotenv').config()
 
-// Importing Axios for fetching Data
 const axios = require('axios')
 
-// Importing New Word from Web
+// Importing New Word from Web & saving in Database
 router.post('/', async (req, res) => {
     try {
         const wordId = req.body.word
+
+        // Filtering illegal enteries
         if(wordId === undefined || wordId === null || wordId == "") throw new Error("ERROR : Invalid Word")
         const flag = await Word.find({ "word": wordId })
         if(flag.length > 0) throw new Error("ERROR : Word already exists")
+        
+        // Making API call to Oxford Dictionary for new word
         const response = await axios({
             url: 'https://od-api.oxforddictionaries.com/api/v2/entries/en-us/'
                 + wordId + '?fields=definitions,examples,etymologies',
@@ -29,6 +30,7 @@ router.post('/', async (req, res) => {
         })
         wordRes = response.data.results[0]
         
+        // Initializing new word
         const word = {
             word: wordRes.id,
             lexicalEntries: []
@@ -64,8 +66,11 @@ router.post('/', async (req, res) => {
 
         const new_word = new Word(word)
         await new_word.save()
+
+        // returning word in response
         res.json(word)
     } catch (err) {
+        // 
         res.json(err.message)
     }
 })

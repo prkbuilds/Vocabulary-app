@@ -1,9 +1,10 @@
+/* Renders Add Button & contains logic for adding words */
+
 import { useState } from 'react'
 import axios from 'axios'
+
 import { Alert, Box, Button, Fab, Input, Modal, Snackbar, Toolbar, Typography } from '@mui/material'
 import { Add } from '@mui/icons-material'
-
-const port = process.env.REACT_APP_SERVER_PORT || 5000;
 
 const buttonStyle = {
   position: 'fixed', 
@@ -27,21 +28,26 @@ const modalStyle = {
 }
 
 export default function AddWords(props) {
+  // Opening Modals & Alerts
   const [open, setOpen] = useState(false)
   const [openSnackbar, setSnackbarOpen] = useState(false)
   const [alert, setAlert] = useState({ severity: 'error', message: '' })
+  
+  // Storing Word to be added
   const [word, setWord] = useState("")
 
+  // Handle Opening & Closing of Modal & Alert
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-
   const handleSnackbarOpen = () => setSnackbarOpen(true)
   const handleSnackbarClose = () => setSnackbarOpen(false)
 
+  // Submit Data to API for adding words
   const onSubmit = async (e) => {
     e.preventDefault()
+    const port = process.env.REACT_APP_SERVER_PORT;
     axios.post(`http://localhost:${port}/`,{
-        word: word
+      word: word
     })
       .then((response) => {
         handleClose()

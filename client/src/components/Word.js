@@ -1,3 +1,5 @@
+/* Renders Each Word Seperately for displaying results & Modals */
+
 import { useState } from 'react'
 import { Box, Container, Divider, IconButton, Modal, Toolbar, Typography } from '@mui/material'
 import { Close } from '@mui/icons-material'
@@ -19,6 +21,7 @@ const modalStyle = {
 }
 
 export default function Words(props) {
+  // Handling Modal for each word
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -28,6 +31,7 @@ export default function Words(props) {
       <div onClick={handleOpen}>
         <h3>{props.word.word}</h3>
         {
+          // Small div for each word displayed in Word-List
           props.word.lexicalEntries.map(lexicalEntry => (
             <p key={lexicalEntry.lexicalCategory}>({lexicalEntry.lexicalCategory})&nbsp;
               {lexicalEntry.entry.senses[0][0].definitions}</p>

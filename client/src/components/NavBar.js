@@ -1,3 +1,5 @@
+/* Renders Main Navbar */
+
 import { Container, IconButton, Toolbar } from '@mui/material'
 import { Search } from '@mui/icons-material'
 

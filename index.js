@@ -1,4 +1,3 @@
-// Importing Modules
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
@@ -20,7 +19,7 @@ mongoose.connect(uri, {
 .then(() => console.log('MongoDB connection established.'))
 .catch((error) => console.error("MongoDB connection failed:", error.message))
 
-// Hosting Servers & Connecting Routes
+// Hosting Server & Connecting Routes
 const wordsRouter = require('./routes/words')
 app.use('/', wordsRouter)
 

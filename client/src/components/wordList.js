@@ -1,3 +1,5 @@
+/* Renders Given Word List for all words */
+
 import { Container, Divider } from '@mui/material'
 
 import Word from './Word'

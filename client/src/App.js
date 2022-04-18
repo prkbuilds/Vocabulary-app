@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
+import axios from 'axios'
 
 import NavBar from './components/NavBar';
 import WordList from './components/WordList'
@@ -11,14 +11,17 @@ import Search from './components/Search'
 import './App.css';
 
 export default function App() {
+  // Main wordlist Data
   const [wordList, setWordList] = useState([])
-  const port = process.env.REACT_APP_SERVER_PORT || 5000;
 
+  // Fetching Data from API
   const fetchData = async () => {
+    const port = process.env.REACT_APP_SERVER_PORT;
     const wordlist = await axios.get(`http://localhost:${port}/`)
     setWordList(wordlist.data)
   }
   
+  // Updating Data on render
   useEffect(() => {
     const fetchData = async () => {
       const port = process.env.REACT_APP_SERVER_PORT || 5000;
