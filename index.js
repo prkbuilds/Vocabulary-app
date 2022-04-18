@@ -29,7 +29,7 @@ mongoose.connect(uri, {
 
 // Hosting Server & Connecting Routes
 const wordsRouter = require('./routes/words')
-app.use('/', wordsRouter)
+app.use('/words', wordsRouter)
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
