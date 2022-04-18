@@ -50,7 +50,7 @@ export default function Words(props) {
             </Toolbar>
             {
               props.word.lexicalEntries.map(lexicalEntry => (
-                <>
+                <div key={lexicalEntry.lexicalCategory}>
                   <Typography variant="p" sx={{ color: 'gray' }}>
                     <i>{lexicalEntry.lexicalCategory ? `${lexicalEntry.lexicalCategory}` : ''}</i>
                     <br />
@@ -59,18 +59,18 @@ export default function Words(props) {
                   {
                     lexicalEntry.entry.senses.map(sense => (
                       sense.map(s => (
-                        <>
+                        <div key={s.definitions}>
                           <p>{s.definitions}</p>
                           <ul>
                             {
-                              (s.examples) ? s.examples.map(example => (<li>{example}</li>)) : ""
+                              (s.examples) ? s.examples.map(example => (<li key={example}>{example}</li>)) : ""
                             }
                           </ul>
-                        </>
+                        </div>
                       ))
                     ))
                   }
-                </>
+                </div>
               )
             )
           }

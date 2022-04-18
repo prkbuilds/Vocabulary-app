@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
-import { Box, Button, Fab, Input, Modal, Toolbar, Typography } from '@mui/material'
+import { Alert, Box, Button, Fab, Input, Modal, Snackbar, Toolbar, Typography } from '@mui/material'
 import { Add } from '@mui/icons-material'
 
 const port = process.env.REACT_APP_SERVER_PORT || 5000;
@@ -26,11 +26,17 @@ const modalStyle = {
   p: 4,
 }
 
-export default function AddWords() {
+export default function AddWords(props) {
   const [open, setOpen] = useState(false)
+  const [openSnackbar, setSnackbarOpen] = useState(false)
+  const [alert, setAlert] = useState({ severity: 'error', message: '' })
   const [word, setWord] = useState("")
+
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+
+  const handleSnackbarOpen = () => setSnackbarOpen(true)
+  const handleSnackbarClose = () => setSnackbarOpen(false)
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -38,10 +44,21 @@ export default function AddWords() {
         word: word
     })
       .then((response) => {
-        console.log(response.data)
         handleClose()
+        props.updateRes()
+        if(response.data.word) {
+          setAlert({ 'severity': 'success', 'message': `${word} Word was Added Successfully` })
+          handleSnackbarOpen()
+        } else {
+          setAlert({ 'severity': 'warning', 'message': `${response.data}` })
+          handleSnackbarOpen()
+        }
       })
-      .catch((error) => console.error(error))
+      .catch((error) => {
+        console.error(error)
+        setAlert({ 'severity': 'error', 'message': `ERROR : ${error}` })
+        handleSnackbarOpen()
+      })
   }
 
   return (
@@ -67,6 +84,11 @@ export default function AddWords() {
           </Toolbar>
         </Box>
       </Modal>
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleSnackbarClose}>
+        <Alert onClose={handleSnackbarClose} severity={alert.severity} sx={{ width: '100%' }}>
+          {alert.message}
+        </Alert>
+      </Snackbar>
     </>
   )
 }

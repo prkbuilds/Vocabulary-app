@@ -12,7 +12,7 @@ export default function NavBar() {
           color="inherit" 
           aria-label="search"
           size="large"
-          //onClick={this.}
+          href="/search"
         >
           <Search />
         </IconButton>
