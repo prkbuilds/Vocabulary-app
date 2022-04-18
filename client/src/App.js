@@ -16,7 +16,7 @@ export default function App() {
 
   // Fetching Data from API
   const fetchData = async () => {
-    const port = process.env.REACT_APP_SERVER_PORT;
+    const port = process.env.PORT;
     const wordlist = await axios.get(`https://vocabulary-app-01.herokuapp.com:${port}/`)
     setWordList(wordlist.data)
   }
@@ -24,8 +24,8 @@ export default function App() {
   // Updating Data on render
   useEffect(() => {
     const fetchData = async () => {
-      const port = process.env.REACT_APP_SERVER_PORT || 5000;
-      const wordlist = await axios.get(`http://localhost:${port}/`)
+      const port = process.env.PORT || 5000;
+      const wordlist = await axios.get(`https://vocabulary-app-01.herokuapp.com:${port}/`)
       setWordList(wordlist.data)
     }
     fetchData()
