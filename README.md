@@ -1,28 +1,38 @@
-# DSC Event Management System
+# Vocabulary-App
+
+<p>
+    <img src="https://raw.githubusercontent.com/PratikFandade/vocabulary-app/main/example.jpg"/>
+</p>
 
 ## 📚 About
-The main task is to keep a track of the attendees of our events. Make a platform to ease the task of managing and keeping track of the participants attending the events. The database will have several events and for each event keep a track of contact details of the participants like name, email, etc. and their attendance for each slot. Events can have varying slots based on the duration of the event. On the first webpage, the admin should be able to mark the attendance of the participants according to their time slots. The second webpage will display the final table with the functionality to sort by the number of slots attended.
+Vocabulary app for storing selective words in Dictionary & searching them according to need.
+
+## ⚙️ Functionalities
+<ul>
+    <li>Store Words with Origin, Definitions & Examples</li>
+    <li>Make calls to Oxford Dictionary API for new word data.</li>
+    <li>Allow users to search for selected words.</li>
+</ul>
 
 ## 🔧 Installation
 Just Download the files, and run
 
 ```bash
-cd client
 npm i
-cd ../server
+cd client
 npm i
 ```
 for installation of all packages in both ``server`` and ``client`` folders.
 
 ## 🔌 Usage
-For Server, create a `.env` file and store all the environmental vairiables.
+For Server, create a `.env` file and store all the environmental vairiables for Oxford Dictionary API & MongoDB Variables.
 Then run the following commands
 ```bash
-cd server
 npm run dev-start
 ```
 
-For Client, just run the following commands to run the react application
+For Client, create a `.env` file and store the environmental vairiable for server port.
+just run the following commands to run the react application
 ```bash
 cd client
 npm start
