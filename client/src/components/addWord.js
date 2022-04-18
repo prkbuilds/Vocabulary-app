@@ -54,9 +54,11 @@ export default function AddWords(props) {
         props.updateRes()
         if(response.data.word) {
           setAlert({ 'severity': 'success', 'message': `${word} Word was Added Successfully` })
+          setWord("")
           handleSnackbarOpen()
         } else {
           setAlert({ 'severity': 'warning', 'message': `${response.data}` })
+          setWord("")
           handleSnackbarOpen()
         }
       })
