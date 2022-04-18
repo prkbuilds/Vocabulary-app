@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import axios from 'axios'
 
-import NavBar from './components/NavBar';
-import WordList from './components/WordList'
-import AddWord from './components/AddWord'
-import Search from './components/Search'
+import NavBar from './components/NavBar.js';
+import WordList from './components/WordList.js'
+import AddWord from './components/AddWord.js'
+import Search from './components/Search.js'
 
 import './App.css';
 
