@@ -10,6 +10,14 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+if(process.env.NODE_ENV == 'production') {
+    app.use(express.static('client/build'))
+    const path = require('path')
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    })
+}
+
 // Connecting MongoDB Datbase
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {
