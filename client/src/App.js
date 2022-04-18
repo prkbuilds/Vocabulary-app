@@ -17,7 +17,7 @@ export default function App() {
   // Fetching Data from API
   const fetchData = async () => {
     const port = process.env.REACT_APP_SERVER_PORT;
-    const wordlist = await axios.get(`http://localhost:${port}/`)
+    const wordlist = await axios.get(`https://vocabulary-app-01.herokuapp.com:${port}/`)
     setWordList(wordlist.data)
   }
   

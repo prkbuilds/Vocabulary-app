@@ -46,7 +46,7 @@ export default function AddWords(props) {
   const onSubmit = async (e) => {
     e.preventDefault()
     const port = process.env.REACT_APP_SERVER_PORT;
-    axios.post(`http://localhost:${port}/`,{
+    axios.post(`https://vocabulary-app-01.herokuapp.com:${port}/`,{
       word: word
     })
       .then((response) => {
