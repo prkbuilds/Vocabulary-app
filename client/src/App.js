@@ -34,14 +34,14 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={
+        <Route path="/" exact element={
           <div className="App">
             <NavBar />
             <WordList wordList={wordList} />
             <AddWord updateRes={fetchData} />
           </div>
         } />
-        <Route path="/search" element={
+        <Route path="/search" exact element={
           <div className="App">
             <Search wordList={wordList} />
           </div>
